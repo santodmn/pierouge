@@ -1,5 +1,5 @@
 /* ==========================================================
-   VELENO — main.js
+   PIEDI VINO — main.js
    Moduli:
    1. Rilevamento Touch (disabilita cursore custom)
    2. Cursore Custom (solo desktop)
@@ -138,4 +138,34 @@ function handleSubmit() {
 
   console.log('Richiesta accesso:', { nome, email, interesse });
   alert('Richiesta ricevuta. Ti contatteremo.');
+}
+/* ==========================================================
+   6. LOOKBOOK — Drag to scroll (solo desktop)
+   ========================================================== */
+
+const track = document.getElementById('lookbookTrack');
+
+if (track && !isTouch) {
+  let isDragging = false;
+  let startX, scrollStart;
+
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+    track.classList.add('dragging');
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.classList.remove('dragging');
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.4; /* 1.4 = velocità di trascinamento */
+    track.scrollLeft = scrollStart - walk;
+  });
 }
