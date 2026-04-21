@@ -1,5 +1,5 @@
 /* ==========================================================
-   VELENO — Stylesheet
+   PIEDIVINO — Stylesheet
    Struttura:
    1. Reset & Variabili
    2. Base & Tipografia
@@ -907,31 +907,63 @@ footer {
   }
 
   /* Hero */
-  #hero {
-    padding: 0 var(--section-pad-h) 4rem;
-    align-items: flex-end;
+#hero {
+    height: 100vh;
+    padding: 0 5%;
+    /* Cambiamo l'allineamento da flex-end a center */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
   }
 
   .hero-image-placeholder {
-    display: none;
+    display: block !important; /* Non nasconderla! */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3; /* La rendiamo un'ombra sensuale sullo sfondo */
+    filter: grayscale(100%) contrast(120%);
   }
 
   .hero-image-overlay {
-    display: none;
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Un gradiente che va dal nero profondo al trasparente verso il centro */
+    background: radial-gradient(circle, transparent 20%, var(--ink) 90%);
+    z-index: 2;
+  }
+
+  .hero-content {
+    z-index: 10;
+    width: 100%;
+    max-width: 100%;
+    /* Riduciamo leggermente il font per evitare che una parola occupi 3 righe */
+    transform: translateY(-20px); /* Lo alziamo leggermente dal centro ottico */
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 15vw, 4.5rem);
+    line-height: 1.1;
+  }
+
+  .hero-sub {
+    margin: 1.5rem auto 2.5rem;
+    font-size: 0.9rem;
+    max-width: 280px; /* Stringiamo il testo per farlo respirare */
   }
 
   .hero-bg {
     background:
       radial-gradient(ellipse 80% 60% at 50% 30%, rgba(90, 10, 10, 0.4) 0%, transparent 70%),
       var(--ink);
-  }
-
-  .hero-content {
-    max-width: 100%;
-  }
-
-  .hero-sub {
-    max-width: 100%;
   }
 
   .scroll-indicator {
