@@ -1,5 +1,5 @@
 /* ==========================================================
-   PIEDIVINO — Stylesheet
+   PIE DI VI NO — Stylesheet
    Struttura:
    1. Reset & Variabili
    2. Base & Tipografia
@@ -73,7 +73,7 @@ body {
 /* Titolo di sezione */
 .section-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 300;
   line-height: 1.1;
 }
@@ -214,29 +214,6 @@ min-height: 700px;
       z-index: -1;
     }
 
-/* Sostituire con <img> quando disponibile — rimuovere questo blocco */
-.hero-image-placeholder {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 52%;
-background: linear-gradient(135deg, #1c1410 0%, #2a0f0f 50%, #0d0b09 100%);
-  clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);  
-overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-image-placeholder::after {
-  content: '[ immagine ]';
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: rgba(232, 224, 212, 0.15);
-  text-transform: uppercase;
-}
-
 /* Immagine hero reale — stessi identici attributi visivi del placeholder */
 .hero-image {
   position: absolute;
@@ -244,13 +221,23 @@ overflow: hidden;
   top: 0;
   bottom: 0;
   width: 60%;
+  background: linear-gradient(135deg, #1c1410 0%, #2a0f0f 50%, #0d0b09 100%);
   clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
   overflow: hidden;
   display: block;
   object-fit: cover;
   object-position: center center;
   height: 100%;
+  justify-content: center;
 }
+.hero-image::after {
+  content: '[ immagine ]';
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(232, 224, 212, 0.15);
+  text-transform: uppercase;
+}
+
 
 /* Sfumatura che raccorda immagine e testo */
 .hero-image-overlay {
@@ -436,6 +423,84 @@ margin-left: 50px;
 margin-left: 200px;
 }
 
+/* ==========================================================
+   6b. LOOKBOOK
+   ========================================================== */
+
+#lookbook {
+  padding: var(--section-pad-v) 0;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.lookbook-header {
+  padding: 0 var(--section-pad-h);
+  margin-bottom: 3rem;
+}
+
+/* Striscia orizzontale scorrevole */
+.lookbook-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 var(--section-pad-h);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+
+  /* Nascondi la scrollbar mantenendo la funzione */
+  scrollbar-width: none;
+}
+.lookbook-track::-webkit-scrollbar { display: none; }
+.lookbook-track.dragging { cursor: grabbing; }
+
+/* Singola immagine del lookbook */
+.lookbook-item {
+  flex: 0 0 auto;
+  width: clamp(220px, 28vw, 380px);
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.lookbook-item img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.lookbook-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Numero in basso a sinistra */
+.lookbook-num {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(232, 224, 212, 0.5);
+}
+
+/* Suggerimento trascina */
+.lookbook-hint {
+  padding: 1.5rem var(--section-pad-h) 0;
+  text-align: right;
+}
+
+.lookbook-hint span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(232, 224, 212, 0.2);
+}
+
 
 /* ==========================================================
    7. IL RITUALE
@@ -456,9 +521,9 @@ margin-left: 200px;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22vw;
+  font-size: 18vw;
   font-weight: 300;
-  color: rgba(122, 26, 26, 0.04);
+  color: rgba(189, 34, 34, 0.04);
   white-space: nowrap;
   letter-spacing: 0.1em;
   pointer-events: none;
@@ -466,7 +531,7 @@ margin-left: 200px;
 }
 
 .rituale-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 7rem;
   position: relative;
 }
@@ -571,7 +636,7 @@ margin-left: 200px;
 /* Immagine prodotto — verticale, orientata al soggetto piedi.
    Sostituire .product-img con <img> in formato portrait 2:3 */
 .product-img {
-  width: 100%;
+  width: 75%;
   aspect-ratio: 2 / 3;
   background: var(--ink-soft);
   position: relative;
@@ -586,7 +651,7 @@ margin-left: 200px;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top; /* privilegia la parte alta — piedi in basso: usare "center bottom" */
+  object-position: center; /* privilegia la parte alta — piedi in basso: usare "center bottom" */
   display: block;
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -922,13 +987,15 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 52%;
+    width: 100%;
     height: 100%;
     z-index: 1;
     opacity: 0.3; /* La rendiamo un'ombra sensuale sullo sfondo */
     filter: grayscale(100%) contrast(120%);
   }
-
+ .hero-image {
+    object-position: 47% center; /* sposta a destra/sinistra — prova valori tra 0% e 100% */
+  }
   .hero-image-overlay {
     display: block !important;
     position: absolute;
@@ -947,6 +1014,14 @@ footer {
     max-width: 100%;
     /* Riduciamo leggermente il font per evitare che una parola occupi 3 righe */
     transform: translateY(-20px); /* Lo alziamo leggermente dal centro ottico */
+  text-align: left;
+    align-items: flex-start;
+  }
+ .hero-eyebrow {
+    font-size: 0.75rem;
+    width: 40%;
+    letter-spacing: 0.58em;
+    text-align: center;
   }
 
   .hero-title {
@@ -957,7 +1032,17 @@ footer {
   .hero-sub {
     margin: 1.5rem auto 2.5rem;
     font-size: 0.9rem;
-    max-width: 280px; /* Stringiamo il testo per farlo respirare */
+    max-width: 42%;
+    margin-left: 0;
+ text-align: left;
+  }
+.hero-cta {
+    justify-content: flex-start;
+  }
+
+  .hero-cta-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
   }
 
   .hero-bg {
@@ -979,6 +1064,24 @@ footer {
   .manifesto-number {
     font-size: 7rem;
   }
+
+  .lookbook-item {
+    width: clamp(180px, 70vw, 280px);
+  }
+  .lookbook-hint span::before {
+    content: '— scorri';
+  }
+  .lookbook-hint span {
+    font-size: 0;
+  }
+  .lookbook-hint span::before {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(232, 224, 212, 0.2);
+  }
+}
+
 
   /* Rituale — 2 colonne su tablet, 1 su mobile stretto */
   .steps {
@@ -1045,7 +1148,7 @@ footer {
   /* Aumentiamo lo spessore da 1px a 4px (modifica questo valore a tuo piacimento) */
   /* Usiamo rgba per mantenere l'effetto semitrasparente ma più visibile, 
      oppure usa var(--blood) se vuoi un netto stacco cromatico */
-  border-top: 4px solid rgba(232, 224, 212, 0.15); 
+  border-top: 2px solid rgba(232, 224, 212, 0.15); ri
 }
 
 
